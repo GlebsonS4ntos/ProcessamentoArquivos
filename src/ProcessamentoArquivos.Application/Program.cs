@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-using ProcessamentoArquivos.Infraestructure.Data;
+using ProcessamentoArquivos.Infraestructure.Helpers;
+using ProcessamentoArquivos.Service.Helpers;
 
 namespace ProcessamentoArquivos.Application
 {
@@ -10,10 +10,8 @@ namespace ProcessamentoArquivos.Application
             var builder = Host.CreateApplicationBuilder(args);
             builder.Services.AddHostedService<Worker>();
 
-            builder.Services.AddDbContext<ProcessamentoArquivosContext>(opt => 
-            {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("Arquivos"));
-            });
+            builder.Services.AddInfraestructure(builder.Configuration);
+            builder.Services.AddService();
 
             var host = builder.Build();
             host.Run();

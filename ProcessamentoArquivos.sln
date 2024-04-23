@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessamentoArquivos.Application", "src\ProcessamentoArquivos.Application\ProcessamentoArquivos.Application.csproj", "{4F7404BA-E6D8-439A-9223-819780D07B4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessamentoArquivos.Application", "src\ProcessamentoArquivos.Application\ProcessamentoArquivos.Application.csproj", "{4F7404BA-E6D8-439A-9223-819780D07B4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessamentoArquivos.Service", "src\ProcessamentoArquivos.Service\ProcessamentoArquivos.Service.csproj", "{DA5E82C3-5CA2-4FD5-B1CB-469AC619F3C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessamentoArquivos.Service", "src\ProcessamentoArquivos.Service\ProcessamentoArquivos.Service.csproj", "{DA5E82C3-5CA2-4FD5-B1CB-469AC619F3C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessamentoArquivos.Domain", "src\ProcessamentoArquivos.Domain\ProcessamentoArquivos.Domain.csproj", "{15FD45D1-EDF4-4ABB-8CAA-7B746D345D8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessamentoArquivos.Domain", "src\ProcessamentoArquivos.Domain\ProcessamentoArquivos.Domain.csproj", "{15FD45D1-EDF4-4ABB-8CAA-7B746D345D8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessamentoArquivos.Infraestructure", "src\ProcessamentoArquivos.Infraestructure\ProcessamentoArquivos.Infraestructure.csproj", "{E227F815-8B3F-4AEB-982B-D1411B4C57E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProcessamentoArquivos.Infraestructure", "src\ProcessamentoArquivos.Infraestructure\ProcessamentoArquivos.Infraestructure.csproj", "{E227F815-8B3F-4AEB-982B-D1411B4C57E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Application", "1 - Application", "{3B5B3AE4-E90B-4B6B-A72A-C1C95D938B7A}"
 EndProject

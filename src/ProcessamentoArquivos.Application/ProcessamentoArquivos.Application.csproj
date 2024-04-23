@@ -18,5 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProcessamentoArquivos.Infraestructure\ProcessamentoArquivos.Infraestructure.csproj" />
+    <ProjectReference Include="..\ProcessamentoArquivos.Service\ProcessamentoArquivos.Service.csproj" />
   </ItemGroup>
 </Project>
