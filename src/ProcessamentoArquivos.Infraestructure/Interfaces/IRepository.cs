@@ -4,10 +4,10 @@ namespace ProcessamentoArquivos.Infraestructure.Interfaces
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
-        Task<IEnumerable<TEntity>> GetAll();
-        Task<TEntity> GetById(Guid id);
-        Task Add(TEntity entity);
-        Task Delete (Guid id);
-        Task Update(TEntity entity);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task<TEntity> GetByIdAsync(Guid id);
+        Task AddAsync(TEntity entity);
+        Task DeleteAsync (Guid id);
+        Task UpdateAsync(TEntity entity);
     }
 }
