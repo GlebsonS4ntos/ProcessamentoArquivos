@@ -23,7 +23,13 @@ namespace ProcessamentoArquivos.Service.Validations
         {
             try
             {
-                var arrayCpf = Array.ConvertAll(cpf.Split(""), int.Parse);
+                var arrayCpf = cpf.ToCharArray();
+                var arrayCpfInt = new int[arrayCpf.Length];
+
+                for(int i = 0; i < arrayCpf.Length; i++)
+                {
+                    arrayCpfInt[i] = int.Parse(arrayCpf[i].ToString());
+                }
 
                 var arrayMultiplicacaoPrimeiroVerificador = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
                 var arrayMultiplicacaoSegundoVerificador = new int[] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
@@ -33,13 +39,13 @@ namespace ProcessamentoArquivos.Service.Validations
                 //como o array de multiplicacao tem tamanho 9 vai pegar os 9 primeiros do array de cpf
                 for (int i = 0; i < arrayMultiplicacaoPrimeiroVerificador.Length; i++)
                 {
-                    var resultadoMultiplicacao = arrayMultiplicacaoPrimeiroVerificador[i] * arrayCpf[i];
+                    var resultadoMultiplicacao = arrayMultiplicacaoPrimeiroVerificador[i] * arrayCpfInt[i];
                     resultadoAdicao += resultadoMultiplicacao;
                 }
 
                 var primeiroVerificadorEsperado = (resultadoAdicao % 11) > 1 ? 11 - (resultadoAdicao % 11) : 0;
 
-                if (primeiroVerificadorEsperado != arrayCpf[9]) //Comparação pra ver se o 1 digito bate com o que foi calculado
+                if (primeiroVerificadorEsperado != arrayCpfInt[9]) //Comparação pra ver se o 1 digito bate com o que foi calculado
                 {
                     return false;
                 }
@@ -48,19 +54,19 @@ namespace ProcessamentoArquivos.Service.Validations
 
                 for (int i = 0; i < arrayMultiplicacaoSegundoVerificador.Length; i++)
                 {
-                    resultadoAdicao += arrayMultiplicacaoSegundoVerificador[i] * arrayCpf[i];
+                    resultadoAdicao += arrayMultiplicacaoSegundoVerificador[i] * arrayCpfInt[i];
                 }
 
                 var segundoVerificadorEsperado = (resultadoAdicao % 11) > 1 ? 11 - (resultadoAdicao % 11) : 0;
 
-                if (segundoVerificadorEsperado != arrayCpf[10]) //Comparação pra ver se o 2 digito bate com o que foi calculado
+                if (segundoVerificadorEsperado != arrayCpfInt[10]) //Comparação pra ver se o 2 digito bate com o que foi calculado
                 {
                     return false;
                 }
                 return true;
 
             } catch(Exception ex) { 
-                throw new Exception(ex.Message);
+               throw new Exception(ex.Message);
             }
         }
     }

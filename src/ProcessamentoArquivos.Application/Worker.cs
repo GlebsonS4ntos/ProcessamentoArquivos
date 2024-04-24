@@ -1,12 +1,16 @@
+using ProcessamentoArquivos.Service.Interfaces;
+
 namespace ProcessamentoArquivos.Application
 {
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
+        private readonly IServiceScopeFactory _serviceScoped;
 
-        public Worker(ILogger<Worker> logger)
+        public Worker(ILogger<Worker> logger, IServiceScopeFactory serviceScoped)
         {
             _logger = logger;
+            _serviceScoped = serviceScoped;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -17,7 +21,14 @@ namespace ProcessamentoArquivos.Application
                 {
                     _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 }
-                await Task.Delay(1000, stoppingToken);
+
+                using(var scope = _serviceScoped.CreateScope())
+                {
+                    var fileService = scope.ServiceProvider.GetRequiredService<IFileHandlerService>();
+                    await fileService.ReadFilesAsync();
+                }
+
+                await Task.Delay(50000, stoppingToken);
             }
         }
     }
