@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProcessamentoArquivos.Infraestructure.Data;
 
@@ -11,9 +12,11 @@ using ProcessamentoArquivos.Infraestructure.Data;
 namespace ProcessamentoArquivos.Infraestructure.Migrations
 {
     [DbContext(typeof(ProcessamentoArquivosContext))]
-    partial class ProcessamentoArquivosContextModelSnapshot : ModelSnapshot
+    [Migration("20240424145238_Cpf is unique")]
+    partial class Cpfisunique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

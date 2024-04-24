@@ -13,7 +13,10 @@ namespace ProcessamentoArquivos.Infraestructure.Mapping
             builder.Property(c => c.Cpf)
                 .IsRequired()
                 .HasColumnType("varchar(11)");
-            
+
+            builder.HasIndex(c => c.Cpf)
+                .IsUnique();
+
             builder.Property(c => c.Nome)
                 .IsRequired()
                 .HasColumnType("varchar(200)");
