@@ -45,10 +45,5 @@ namespace ProcessamentoArquivos.Infraestructure.Repositories
             _context.Set<TEntity>().Update(entity);
             await _context.SaveChangesAsync();
         }
-
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
     }
 }

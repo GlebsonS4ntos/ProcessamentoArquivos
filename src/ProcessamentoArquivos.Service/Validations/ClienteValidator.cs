@@ -66,7 +66,7 @@ namespace ProcessamentoArquivos.Service.Validations
                 return true;
 
             } catch(Exception ex) { 
-               throw new Exception(ex.Message);
+               throw ex;
             }
         }
     }

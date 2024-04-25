@@ -23,37 +23,45 @@ namespace ProcessamentoArquivos.Service.Services
 
         public async Task ReadFilesAsync()
         {
-            var files = Directory.GetFiles(_config["PathArchive"], "*.txt");
-            var clientesDto = new List<ClienteDto>();
-
-            foreach (var file in files)
+            try
             {
-                string[] lines = File.ReadAllLines(file);
-                foreach (var line in lines)
+                var files = Directory.GetFiles(_config["PathArchive"], "*.txt");
+                var clientesDto = new List<ClienteDto>();
+
+                foreach (var file in files)
                 {
-                    var info = line.Split('|');
-                    if (info.Length > 2)
+                    string[] lines = File.ReadAllLines(file);
+                    for (int i = 0; i < lines.Length; i++)
                     {
-                        //retornar uma exception sobre o formato do aquivo
+                        var info = lines[i].Split('|');
+                        if (info.Length > 2)
+                        {
+                            throw new Exception($"Cliente Possue mais de 2 Propriedades, isso ocorre inicialmente na linha {i+1} no arquivo {file}.");
+                        }
+
+                        var clienteDto = new ClienteDto() { Nome = info[0], Cpf = info[1] };
+
+                        // i+1 indica a linha que esta sendo lida, ja que o indice comeca em 0
+                        await ValidarAsync(clienteDto, (i + 1), file.ToString());
+                        clientesDto.Add(clienteDto);
                     }
-
-                    var clienteDto = new ClienteDto() { Nome = info[0], Cpf = info[1] };
-
-                    await ValidarAsync(clienteDto);
-                    clientesDto.Add(clienteDto);
                 }
+                var e = _mapper.Map<List<Cliente>>(clientesDto);
+                await _repository.BulkInsertAsync(e);
+            } catch (Exception ex) {
+                throw ex;
             }
-            var e =_mapper.Map<List<Cliente>>(clientesDto);
-            await _repository.BulkInsertAsync(e);
         }
 
-        private async Task ValidarAsync(ClienteDto dto)
+        private async Task ValidarAsync(ClienteDto dto, int numberLine, string nameFile)
         {
             var validator = new ClienteValidator();
             var result = await validator.ValidateAsync(dto);
             if (!result.IsValid)
             {
-                //gerar exception e adicionar as mensagens de erro
+                var erros = result.Errors.Select(e => e.ErrorMessage).ToList();
+                var mensagemErro = string.Join(", ", erros);
+                throw new Exception($"Foram encontrados erros de validacoes ao tentar adicionar o registro da linha: {numberLine} do arquivo {nameFile} com os erros: {mensagemErro}.");
             }
         }
     }

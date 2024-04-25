@@ -2,7 +2,7 @@
 
 namespace ProcessamentoArquivos.Infraestructure.Interfaces
 {
-    public interface IRepository<TEntity> : IDisposable where TEntity : Entity
+    public interface IRepository<TEntity> where TEntity : Entity
     {
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task<TEntity> GetByIdAsync(Guid id);
