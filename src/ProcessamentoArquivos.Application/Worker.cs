@@ -28,7 +28,7 @@ namespace ProcessamentoArquivos.Application
                     await fileService.ReadFilesAsync();
                 }
 
-                await Task.Delay(50000, stoppingToken);
+                await Task.Delay(TimeSpan.FromDays(1), stoppingToken);
             }
         }
     }

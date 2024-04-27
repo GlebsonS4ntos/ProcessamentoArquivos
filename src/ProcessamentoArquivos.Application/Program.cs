@@ -8,13 +8,17 @@ namespace ProcessamentoArquivos.Application
     {
         public static void Main(string[] args)
         {
-            // Configuração do Serilog
+            //Configuração do Serilog
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File("../../logs/log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             var builder = Host.CreateApplicationBuilder(args);
+
+            builder.Logging.ClearProviders();
+            builder.Logging.AddSerilog(Log.Logger, true); //adicionando o serilog como unico provedor de log
+
             builder.Services.AddHostedService<Worker>();
 
             builder.Services.AddInfraestructure(builder.Configuration);
@@ -30,6 +34,11 @@ namespace ProcessamentoArquivos.Application
             catch (Exception ex)
             {
                 Log.Fatal(ex, "Host terminated unexpectedly!");
+            }
+            finally
+            {
+                Log.Information("Server Shutting down...");
+                Log.CloseAndFlush();
             }
         }
     }
